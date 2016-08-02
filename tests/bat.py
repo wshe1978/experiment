@@ -3,7 +3,7 @@ class BasicAcceptanceTest(object):
 
     @staticmethod
     def test():
-        print('This is basic acceptance test!')
+        print('This is basic acceptance testxxx!')
 
 
 if __name__ == '__main__':
