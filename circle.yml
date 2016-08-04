@@ -3,4 +3,4 @@ machine:
     version: 3.5.1
 test:
   override:
-    - ./tests/hello_world.py
+    - python ./tests/hello_world.py
