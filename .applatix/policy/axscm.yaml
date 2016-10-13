@@ -1,0 +1,68 @@
+---
+type: service_template
+subtype: container
+name: axscm
+description: Checks out a source repository and perform optional rebase operation
+container:
+  resources:
+    mem_mib: 256
+    cpu_cores: 0.1
+    disk_gb: 10
+  image: get.applatix.io/wei/axscm:latest
+  docker_options: ""
+  command: "axscm clone %%repo%% /src --commit %%commit%% --merge %%target_branch%%"
+inputs:
+  parameters:
+    commit:
+      default: "%%session.commit%%"
+    repo:
+      default: "%%session.repo%%"
+    target_branch:
+      default: "%%session.target_branch%%"
+outputs:
+  artifacts:
+    code:
+      path: "/src"
+
+---
+type: policy
+name: axscm-policy
+description: axscm-policy
+template: axscm
+enabled: true
+notifications:
+  -
+    when:
+      - on_start
+      - on_failure
+      - on_success
+      - on_change
+    whom:
+      - committer
+      - submitter
+      - author
+      - demo@company.com
+  -
+    when:
+      - on_failure
+    whom:
+      - adc@slack.com
+when:
+  -
+    event: on_push
+    target_branches:
+      - master
+      - development
+      - feature
+  -
+    event: on_pull_request
+    target_branches:
+      - master
+      - development
+      - feature
+  -
+    event: on_pull_request_merge
+    target_branches:
+      - master
+      - development
+      - feature
