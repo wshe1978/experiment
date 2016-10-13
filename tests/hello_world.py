@@ -3,7 +3,7 @@ class HelloWorldTest(object):
 
     @staticmethod
     def test():
-        print('Hello world!')
+        print('Hello worldxxx!')
 
 
 if __name__ == '__main__':
