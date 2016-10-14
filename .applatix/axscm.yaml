@@ -52,17 +52,17 @@ when:
     event: on_push
     target_branches:
       - master
-      - development
+      - develop
       - feature
   -
     event: on_pull_request
     target_branches:
       - master
-      - development
+      - develop
       - feature
   -
     event: on_pull_request_merge
     target_branches:
       - master
-      - development
+      - develop
       - feature
